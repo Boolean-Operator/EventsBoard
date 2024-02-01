@@ -1,13 +1,15 @@
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
   Navigate,
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
-
-import Events from './components/Events/Events.jsx';
-import EventDetails from './components/Events/EventDetails.jsx';
-import NewEvent from './components/Events/NewEvent.jsx';
+import { queryClient } from './utils/query.js';
 import EditEvent from './components/Events/EditEvent.jsx';
+import EventDetails from './components/Events/EventDetails.jsx';
+import Events from './components/Events/Events.jsx';
+import NewEvent from './components/Events/NewEvent.jsx';
 
 const router = createBrowserRouter([
   {
@@ -38,7 +40,14 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </>
+  );
 }
 
 export default App;

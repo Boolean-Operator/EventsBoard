@@ -1,9 +1,17 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import ImagePicker from '../ImagePicker.jsx';
+import { fetchSelectableImages } from '../../utils/http.js';
+import ErrorBlock from '../UI/ErrorBlock.jsx';
 
 export default function EventForm({ inputData, onSubmit, children }) {
   const [selectedImage, setSelectedImage] = useState(inputData?.image);
+
+  const { data, isPending, isError, error } = useQuery({
+    queryKey: ['event-images'],
+    queryFn: fetchSelectableImages,
+  });
 
   function handleSelectImage(image) {
     setSelectedImage(image);
@@ -29,14 +37,22 @@ export default function EventForm({ inputData, onSubmit, children }) {
           defaultValue={inputData?.title ?? ''}
         />
       </p>
-
-      <div className="control">
-        <ImagePicker
-          images={[]}
-          onSelect={handleSelectImage}
-          selectedImage={selectedImage}
+      {isPending && <p>Loading selectable images.</p>}
+      {isError && (
+        <ErrorBlock
+          title="Failde to load selectable images."
+          message={error.info?.message || 'Please try again later.'}
         />
-      </div>
+      )}
+      {data && (
+        <div className="control">
+          <ImagePicker
+            images={data}
+            onSelect={handleSelectImage}
+            selectedImage={selectedImage}
+          />
+        </div>
+      )}
 
       <p className="control">
         <label htmlFor="description">Description</label>
