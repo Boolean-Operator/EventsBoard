@@ -44,8 +44,15 @@ export default function EventDetails() {
   function handleDelete() {
     mutate({ id: params.id });
   }
+  function formatTimeString(time) {
+    if (time.length > 4) {
+      let timeArr = time.split(':', 2);
+      let AP = +timeArr[0] < 12 ? 'AM' : 'PM';
+      timeArr[0] = +timeArr[0] % 12 || 12;
+      return timeArr[0] + ':' + timeArr[1] + ' ' + AP;
+    }
+  }
 
-  console.log('Details', data);
   let content;
 
   if (isPending) {
@@ -71,7 +78,7 @@ export default function EventDetails() {
   }
 
   if (data) {
-    console.log('Details - data', data);
+    const formattedTime = formatTimeString(data.time);
     const formattedDate = new Date(data.date).toLocaleDateString('en-US', {
       day: 'numeric',
       month: 'short',
@@ -92,7 +99,7 @@ export default function EventDetails() {
             <div>
               <p id="event-details-location">{data.location}</p>
               <time dateTime={`Todo-DateT$Todo-Time`}>
-                {formattedDate} @ {data.time}
+                {formattedDate} @ {formattedTime}
               </time>
             </div>
             <p id="event-details-description">{data.description}</p>

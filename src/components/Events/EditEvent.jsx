@@ -7,13 +7,13 @@ import Modal from '../UI/Modal.jsx';
 import EventForm from './EventForm.jsx';
 
 export default function EditEvent() {
-  console.log('Edit');
   const params = useParams();
   const navigate = useNavigate();
 
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['events', params.id],
     queryFn: ({ signal }) => fetchEvent({ signal, id: params.id }),
+    staleTime: 5000,
   });
 
   const { mutate } = useMutation({
@@ -25,22 +25,19 @@ export default function EditEvent() {
       const previousEvent = queryClient.getQueryData(['events', params.id]);
 
       queryClient.setQueryData(['events', params.id], newEvent);
-      console.log('Edit - setData');
       return { previousEvent, newEvent };
     },
     onError: (error, data, context) => {
       queryClient.setQueryData(['events', params.id], context.previousEvent);
     },
-    onSettled: async () => {
-      return await queryClient.invalidateQueries({
+    onSettled: () => {
+      queryClient.invalidateQueries({
         queryKey: ['events', params.id],
       });
-      // console.log('Edit - invalidate');
     },
   });
 
   function handleSubmit(formData) {
-    console.log('Edit submit');
     mutate({ id: params.id, event: formData });
     navigate('../');
   }

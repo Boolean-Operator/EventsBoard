@@ -4,7 +4,7 @@ import { createNewEvent } from '../../utils/http.js';
 import Modal from '../UI/Modal.jsx';
 import EventForm from './EventForm.jsx';
 import ErrorBlock from '../UI/ErrorBlock.jsx';
-import { queryClient } from '../../utils/query.js';
+import { queryClient } from '../../utils/http.js';
 
 export default function NewEvent() {
   const navigate = useNavigate();

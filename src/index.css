@@ -32,7 +32,10 @@ ul {
   height: 2rem;
   margin-bottom: -2rem;
   text-align: center;
-  accent-color: #e30d7c;
+  accent-color: #0477bc;
+}
+#main-header-loading progress {
+  height: 20px;
 }
 
 #header-title {
@@ -74,7 +77,7 @@ ul {
 }
 
 #overview-section h2 strong {
-  color: #e30d7c;
+  color: #0477bc;
 }
 
 #overview-section p {
@@ -228,7 +231,7 @@ ul {
 }
 
 #image-picker li.selected {
-  border-color: #e30d7c;
+  border-color: #0477bc;
 }
 
 #image-picker img {
@@ -338,7 +341,7 @@ ul {
   cursor: pointer;
   padding: 0.5rem 1.5rem;
   border: none;
-  background-color: #e30d7c;
+  background-color: #0477bc;
   color: #fff;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26);
@@ -347,7 +350,7 @@ ul {
 }
 
 .button:hover {
-  background-color: #e30d5b;
+  background-color: #e3aa0d;
   color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
@@ -420,10 +423,10 @@ ul {
   width: 64px;
   height: 64px;
   margin: 8px;
-  border: 8px solid #e30d5b;
+  border: 8px solid #e3aa0d;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #e30d5b transparent transparent transparent;
+  border-color: #e3aa0d transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;

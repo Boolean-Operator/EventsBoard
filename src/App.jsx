@@ -5,7 +5,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
-import { queryClient } from './utils/query.js';
+import { queryClient } from './utils/http.js';
 import EditEvent from './components/Events/EditEvent.jsx';
 import EventDetails from './components/Events/EventDetails.jsx';
 import Events from './components/Events/Events.jsx';
